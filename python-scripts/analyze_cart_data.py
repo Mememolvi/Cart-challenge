@@ -3,7 +3,7 @@ from datetime import datetime
 from collections import Counter, defaultdict
 
 # File path (adjust as needed)
-AOF_FILE = "cart_data.aof"
+AOF_FILE = "../cart_data.aof"
 
 # Colors for each fruit
 COLORS = {

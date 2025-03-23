@@ -2,7 +2,7 @@ import random
 from datetime import datetime, timedelta
 import argparse
 
-AOF_FILE = "cart_data.aof"
+AOF_FILE = "../cart_data.aof"
 
 ITEMS = ["APPLE", "BANANA", "MELON", "LIME"]
 
