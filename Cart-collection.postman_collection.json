@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "189a434b-3bb5-4ebf-8e2a-b93854b36eae",
+		"name": "Cart-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20222078"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/api/cart/add",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"itemName\":\"Lime\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/cart/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cart",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/cart/getAllItems",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/cart/getAllItems",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cart",
+						"getAllItems"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/cart/getTotal",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/cart/getTotal",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cart",
+						"getTotal"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
