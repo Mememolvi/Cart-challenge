@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "189a434b-3bb5-4ebf-8e2a-b93854b36eae",
-		"name": "Cart-collection",
+		"_postman_id": "5175d497-e386-46b3-8a03-601adce1e777",
+		"name": "Cart-collection-js-proxy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20222078"
 	},
@@ -47,11 +47,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/cart/getAllItems",
+					"raw": "http://localhost:3000/api/cart/getAllItems",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "3000",
 					"path": [
 						"api",
 						"cart",

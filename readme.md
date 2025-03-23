@@ -164,7 +164,7 @@ com.shopping.cart.challenge
   ```
 
 ### Postman Collection
-- A Postman collection (`Cart-collection.json`) is included in the project root for testing the API endpoints.
+- A Postman collection (`Cart-collection-java-backend.postman_collection.json`) is included in the project root for testing the API endpoints.
 
 ---
 
@@ -189,6 +189,156 @@ com.shopping.cart.challenge
     - `calculateTotal` in `CartRepository` computes the total cost by applying each item’s pricing rules to its quantity.
 
 ---
+### Part 2: JavaScript Proxy Server (/js-proxy)
+
+This directory contains a Node.js/Express proxy server that acts as an intermediary between a client (e.g., a frontend application) and the Java backend of the Shopping Cart Challenge. The proxy server forwards requests to the Java backend controllers and returns the responses to the client, fulfilling **Part 2: JavaScript API Layer** of the challenge.
+
+## Overview
+
+The proxy server exposes RESTful endpoints to:
+- Add items to the cart.
+- Retrieve all items in the cart.
+- Calculate the total cost of the cart.
+
+It communicates with the Java backend (running on `http://localhost:8080`) using HTTP requests and includes proper error handling and response formatting.
+
+## Directory Structure
+
+```
+js-api/
+├── src/
+│   ├── controllers/       # API route handlers
+│   │   └── cartController.js
+│   ├── routes/            # Route definitions
+│   │   └── cartRoutes.js
+│   ├── utils/             # Utility functions (e.g., error handling)
+│   │   └── errorHandler.js
+│   └── index.js           # Main server entry point
+├── tests/                 # Unit and integration tests (not implemented)
+├── .env                   # Environment variables
+├── package.json           # Node.js dependencies and scripts
+└── README.md              # This file
+```
+
+## Prerequisites
+
+- **Node.js**: Version 14 or higher (v18 LTS recommended). Node.js v12 (as detected in your environment) is not fully compatible with the specified dependencies.
+- **Java Backend**: The Java backend must be running on `http://localhost:8080`. See `java-backend/README.md` for setup instructions.
+- **npm**: Ensure npm is installed (comes with Node.js).
+
+## Setup
+
+1. **Navigate to the Directory**:
+   ```bash
+   cd /js-api
+   ```
+
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+   This installs the required dependencies: `express`, `axios`, `dotenv`, and `nodemon` (for development).
+
+3. **Configure Environment Variables**:
+   Create a `.env` file in the `js-api/` directory with the following content:
+   ```env
+   JAVA_BACKEND_URL=http://localhost:8080
+   PORT=3000
+   ```
+   - `JAVA_BACKEND_URL`: The URL of the Java backend.
+   - `PORT`: The port on which the proxy server will run.
+
+4. **Start the Java Backend**:
+   Ensure the Java backend is running:
+   ```bash
+   cd ../java-backend
+   mvn spring-boot:run
+   ```
+
+5. **Run the Proxy Server**:
+   - Production mode:
+     ```bash
+     cd js-proxy
+     npm start
+     ```
+   - Development mode (with auto-restart using `nodemon`):
+     ```bash
+     cd js-proxy
+     npm run dev
+     ```
+   The server will start on `http://localhost:3000`.
+
+## API Endpoints
+
+The proxy server exposes the following endpoints, which mirror the Java backend’s endpoints:
+
+### 1. Add Item to Cart
+- **Endpoint**: `POST /api/cart/add`
+- **Request Body**:
+  ```json
+  {
+    "itemName": "Lime"
+  }
+  ```
+- **Response**:
+  - Success: `200 OK`
+    ```json
+    { "message": "Lime" }
+    ```
+  - Error: `400 Bad Request` or `500 Internal Server Error`
+    ```json
+    { "error": "Invalid item: 'Orange' is not a valid item." }
+    ```
+- **Example**:
+  ```bash
+  curl -X POST -H "Content-Type: application/json" -d '{"itemName":"Lime"}' http://localhost:3000/api/cart/add
+  ```
+
+### 2. Get All Items in Cart
+- **Endpoint**: `GET /api/cart/getAllItems`
+- **Response**:
+  - Success: `200 OK`
+    ```json
+    {
+      "cartItems": { "LIME": 1 },
+      "totalCartCost": 0.15
+    }
+    ```
+  - Error: `500 Internal Server Error`
+    ```json
+    { "error": "Internal Server Error" }
+    ```
+- **Example**:
+  ```bash
+  curl http://localhost:3000/api/cart/getAllItems
+  ```
+
+### 3. Get Total Cost
+- **Endpoint**: `GET /api/cart/getTotal`
+- **Response**:
+  - Success: `200 OK`
+    ```json
+    0.15
+    ```
+  - Error: `500 Internal Server Error`
+    ```json
+    { "error": "Internal Server Error" }
+    ```
+- **Example**:
+  ```bash
+  curl http://localhost:3000/api/cart/getTotal
+  ```
+
+### Postman Collection
+- A Postman collection (`Cart-collection-js-proxy.postman_collection.json`) is included in the project root for testing the API endpoints.
+
+
+## Implementation Details
+
+- **Technology**: Built with Node.js and Express, using `axios` to make HTTP requests to the Java backend.
+- **Error Handling**: Includes a global error handler (`src/utils/errorHandler.js`) to format errors consistently, handling both Java backend errors (e.g., 400, 500) and network issues.
+- **Environment Variables**: Uses `dotenv` to load configuration from a `.env` file, making the backend URL configurable.
+- **Modularity**: Organized into controllers, routes, and utilities for maintainability.
 
 
 
@@ -304,10 +454,12 @@ python analyze_cart_data.py
 ### Check the generated plots:
 
 - `purchases_by_day.png`
+
 <img src="python-scripts/purchases_by_day.png" alt="Purchases by Day Plot">
 
 - `purchases_by_hour.png`
-  <img src="python-scripts/purchases_by_hour.png" alt="Purchases by Hour Plot">
+
+<img src="python-scripts/purchases_by_hour.png" alt="Purchases by Hour Plot">
 
 
 #### Observations from purchase_by_day.png plot:
