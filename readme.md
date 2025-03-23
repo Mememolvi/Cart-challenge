@@ -229,7 +229,7 @@ js-api/
 
 1. **Navigate to the Directory**:
    ```bash
-   cd /js-proxy
+   cd js-proxy
    ```
 
 2. **Install Dependencies**:
@@ -382,7 +382,8 @@ pip install matplotlib
 ### 1. Simulate Purchase Data
 Run `simulate_cart_data.py` with start and end dates to generate purchase data.
 ```bash
-python simulate_cart_data.py --start 2025-03-23 --end 2025-03-29
+cd python-scripts
+python3 simulate_cart_data.py --start 2025-03-23 --end 2025-03-29
 ```
 
 #### Arguments:
@@ -403,7 +404,8 @@ LIME 2025-03-24 19:33:45.678
 ### 2. Analyze Purchase Data
 Run `analyze_cart_data.py` to generate visualizations from the data in `cart_data.aof`.
 ```bash
-python analyze_cart_data.py
+cd python-scripts
+python3 analyze_cart_data.py
 ```
 
 #### Requirements:
