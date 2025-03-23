@@ -343,7 +343,7 @@ The proxy server exposes the following endpoints, which mirror the Java backendâ
 
 
 This project consists of two Python scripts to simulate and visualize shopping cart purchase data:
-1. **`simulate_cart_data.py`**: Generates synthetic purchase data for four fruits and appends it to an Append-Only File (AOF).
+1. **`DataSimulator.py`**: Generates synthetic purchase data for four fruits and appends it to an Append-Only File (AOF).
 2. **`analyze_cart_data.py`**: Analyzes the AOF data and generates visualizations showing purchase patterns by hour of day and day of the week.
 
 The supported items are `APPLE`, `BANANA`, `MELON`, and `LIME`, with simulated shopping patterns based on time preferences and weekend behavior.
@@ -364,7 +364,7 @@ pip install matplotlib
 
 ## Files
 
-### `simulate_cart_data.py`
+### `DataSimulator.py`
 - Simulates purchases over a specified date range.
 - Appends data to `cart_data.aof` in the format: `<ITEM> <TIMESTAMP>` (e.g., `APPLE 2025-03-23 08:45:12.345`).
 
@@ -380,10 +380,10 @@ pip install matplotlib
 ## Usage
 
 ### 1. Simulate Purchase Data
-Run `simulate_cart_data.py` with start and end dates to generate purchase data.
+Run `DataSimulator.py` with start and end dates to generate purchase data.
 ```bash
 cd python-scripts
-python3 simulate_cart_data.py --start 2025-03-23 --end 2025-03-29
+python3 DataSimulator.py --start 2025-03-23 --end 2025-03-29
 ```
 
 #### Arguments:
@@ -418,7 +418,7 @@ Generates two PNG files:
 
 ## Behavior Details
 
-### Simulation (`simulate_cart_data.py`)
+### Simulation (`DataSimulator.py`)
 - **Items**: APPLE, BANANA, MELON, LIME.
 - **Time Preferences**:
     - APPLE: 6 AM - 12 PM
@@ -442,7 +442,7 @@ Generates two PNG files:
 
 ### Simulate a week's worth of data:
 ```bash
-python simulate_cart_data.py --start 2025-03-23 --end 2025-03-29
+python DataSimulator.py --start 2025-03-23 --end 2025-03-29
 ```
 
 ### Analyze the data:
@@ -469,7 +469,7 @@ python analyze_cart_data.py
 
 2. **Apple Purchases (Red)**:
     - Apples dominate purchases on **Saturday (SAT)** and **Sunday (SUN)**, making up the majority of the stack on those days.
-    - This aligns with the simulation logic in `simulate_cart_data.py`, which increases Apple purchases on weekends (Saturday and Sunday) with a 70% chance of choosing `APPLE` and additional Apple purchases via an `apple_multiplier`.
+    - This aligns with the simulation logic in `DataSimulator.py`, which increases Apple purchases on weekends (Saturday and Sunday) with a 70% chance of choosing `APPLE` and additional Apple purchases via an `apple_multiplier`.
     - On weekdays (MON to FRI), Apple purchases are more balanced with other fruits, though still significant.
 
 3. **Banana, Melon, and Lime Purchases**:
@@ -489,7 +489,7 @@ python analyze_cart_data.py
 
 #### Observations from purchases_by_hour.png plot:
 1. **Time Preferences**:
-    - The simulation script (`simulate_cart_data.py`) defines specific time ranges for each fruit:
+    - The simulation script (`DataSimulator.py`) defines specific time ranges for each fruit:
         - `APPLE`: 6 AM - 12 PM (morning)
         - `BANANA`: 9 AM - 3 PM (mid-morning to early afternoon)
         - `MELON`: 12 PM - 6 PM (afternoon)
