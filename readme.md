@@ -5,9 +5,7 @@
 This repository contains a shopping cart system implementation with a Java backend, JavaScript API layer, and Python
 analytics utility.
 
-
-
-### Part 1: Shopping Cart Challenge
+# Part 1: Shopping Cart Challenge
 
 #### Implementation Thought Process
 
@@ -95,11 +93,12 @@ com.shopping.cart.challenge
 1. **Clone the Repository**:
    ```bash
    git clone <repository-url>
-   cd shopping-cart-challenge
+   cd Cart-challenge
+   cd java-backend
    ```
 
 2. **Configure AOF File Path** :
-    - The AOF file path is specified in `application.properties` or defaults to `/home/neo/Documents/cart_data.aof`.
+    - The AOF file path is specified in `application.properties` or defaults to `../cart_data.aof`.
     - To override, create/edit `src/main/resources/application.properties`:
       ```properties
       cart.aof.file=/path/to/your/cart_data.aof
@@ -189,7 +188,7 @@ com.shopping.cart.challenge
     - `calculateTotal` in `CartRepository` computes the total cost by applying each itemâ€™s pricing rules to its quantity.
 
 ---
-### Part 2: JavaScript Proxy Server (/js-proxy)
+# Part 2: JavaScript Proxy Server (/js-proxy)
 
 This directory contains a Node.js/Express proxy server that acts as an intermediary between a client (e.g., a frontend application) and the Java backend of the Shopping Cart Challenge. The proxy server forwards requests to the Java backend controllers and returns the responses to the client, fulfilling **Part 2: JavaScript API Layer** of the challenge.
 
@@ -230,7 +229,7 @@ js-api/
 
 1. **Navigate to the Directory**:
    ```bash
-   cd /js-api
+   cd /js-proxy
    ```
 
 2. **Install Dependencies**:
@@ -258,12 +257,10 @@ js-api/
 5. **Run the Proxy Server**:
    - Production mode:
      ```bash
-     cd js-proxy
      npm start
      ```
    - Development mode (with auto-restart using `nodemon`):
      ```bash
-     cd js-proxy
      npm run dev
      ```
    The server will start on `http://localhost:3000`.
@@ -341,8 +338,9 @@ The proxy server exposes the following endpoints, which mirror the Java backendâ
 - **Modularity**: Organized into controllers, routes, and utilities for maintainability.
 
 
+---
+# Part 3: Shopping Cart Data Simulator and Analyzer
 
-### Part 3: Shopping Cart Data Simulator and Analyzer
 
 This project consists of two Python scripts to simulate and visualize shopping cart purchase data:
 1. **`simulate_cart_data.py`**: Generates synthetic purchase data for four fruits and appends it to an Append-Only File (AOF).
