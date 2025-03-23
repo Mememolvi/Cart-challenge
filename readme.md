@@ -5,7 +5,7 @@
 This repository contains a shopping cart system implementation with a Java backend, JavaScript API layer, and Python
 analytics utility.
 
-# Part 1: Shopping Cart Challenge
+# Part 1: Shopping Cart Java Backend (/java-backend)
 
 #### Implementation Thought Process
 
@@ -20,7 +20,7 @@ The Java backend was designed with the following considerations:
 4. **AOF Support**: The AOF file allows for persistent storage of cart updates, ensuring data integrity in the event of
    crashes or power failures. Database state can be recreated anytime by replaying the AOF file.
 5. **Reporting Support**: To enable meaningful analytics in the Python utility, a timestamp field was included with each
-   cart update, proving an additional vector to get meaningful insights from shopping cart data.
+   cart update, providing an additional vector to get meaningful insights from shopping cart data.
 
 #### Advantages
 
@@ -97,7 +97,7 @@ com.shopping.cart.challenge
    cd java-backend
    ```
 
-2. **Configure AOF File Path** :
+2. **Configure AOF File Path (Optional)** :
     - The AOF file path is specified in `application.properties` or defaults to `../cart_data.aof`.
     - To override, create/edit `src/main/resources/application.properties`:
       ```properties
@@ -222,8 +222,8 @@ js-api/
 ## Prerequisites
 
 - **Node.js**: Version 14 or higher (v18 LTS recommended). Node.js v12 (as detected in your environment) is not fully compatible with the specified dependencies.
-- **Java Backend**: The Java backend must be running on `http://localhost:8080`. See `java-backend/README.md` for setup instructions.
-- **npm**: Ensure npm is installed (comes with Node.js).
+- **Java Backend**: The Java backend must be running on `http://localhost:8080`. See `README.md` for setup instructions.
+- **npm**: Ensure npm is installed.
 
 ## Setup
 
@@ -339,12 +339,12 @@ The proxy server exposes the following endpoints, which mirror the Java backendâ
 
 
 ---
-# Part 3: Shopping Cart Data Simulator and Analyzer
+# Part 3: Shopping Cart Data Simulator and Analyzer (/python-scripts)
 
 
 This project consists of two Python scripts to simulate and visualize shopping cart purchase data:
 1. **`simulate_cart_data.py`**: Generates synthetic purchase data for four fruits and appends it to an Append-Only File (AOF).
-2. **`analyze_cart_data.py`**: Analyzes the AOF data and generates visualizations showing purchase patterns by hour and day of the week.
+2. **`analyze_cart_data.py`**: Analyzes the AOF data and generates visualizations showing purchase patterns by hour of day and day of the week.
 
 The supported items are `APPLE`, `BANANA`, `MELON`, and `LIME`, with simulated shopping patterns based on time preferences and weekend behavior.
 
@@ -407,7 +407,7 @@ python analyze_cart_data.py
 ```
 
 #### Requirements:
-- `cart_data.aof` must exist in the same directory.
+- `cart_data.aof` must exist in the path specified in the AOF_FILE variable of the script.
 
 #### Output:
 Generates two PNG files:
@@ -435,7 +435,6 @@ Generates two PNG files:
         - Stacked bar chart with days (MON-SUN) on the x-axis and total counts on the y-axis.
         - Each fruit stacks on the previous, using the same color scheme.
 - Plots are saved as PNG files in the current directory.
-- Handles errors gracefully (e.g., missing file).
 
 ## Example Workflow
 
@@ -479,9 +478,6 @@ python analyze_cart_data.py
 4. **Weekend vs. Weekday Trends**:
     - The simulation logic explicitly boosts Apple purchases on weekends, which is clearly reflected in the plot.
     - Weekdays show a more even distribution of purchases across all fruits, likely due to the random selection of items (`random.choice(ITEMS)`) when not favoring Apples.
-
-5. **Consistency Across Days**:
-    - While total purchases vary, each day has purchases of all four fruits, indicating the simulation ensures diversity in item selection even with the Apple weekend bias.
 
 #### Insights
 - **Weekend Shopping Surge**: The spike in purchases on Sunday (and to a lesser extent Saturday) suggests a weekend shopping trend, driven heavily by Apples due to the simulationâ€™s rules.
