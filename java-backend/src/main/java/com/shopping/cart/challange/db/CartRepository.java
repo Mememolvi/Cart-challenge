@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Repository class for managing shopping cart data using an in-memory HashMap
@@ -22,7 +23,7 @@ import java.util.Map;
 @Slf4j
 @Service
 public class CartRepository {
-    private static HashMap<Item, CartItemEntry> database = new HashMap<>();
+    private static Map<Item, CartItemEntry> database = new ConcurrentHashMap<>();
 
     @Value("${cart.aof.file:/home/neo/Documents/cart_data.aof}")
     private String aofFile; // Injected from application.properties
